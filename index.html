@@ -34,35 +34,15 @@
   <h2 id="toc-title">Table of Contents</h2>
   <ul>
     <li><a href="#similiar-products" id="toc-similiar-products">Similar Products</a></li>
-    <li>
-      <a href="#design" id="toc-design">Design</a>
+    <li><a href="#design" id="toc-design">Design</a>
       <ul>
         <li><a href="#system-architecture" id="toc-system-architecture">System Architecture</a></li>
         <li><a href="#functional-specification" id="toc-functional-specification">Functional Specification</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#implementation" id="toc-implementation">Implementation</a>
-      <ul>
-        <li><a href="#cc3200-launchxl-evaluation-board" id="toc-cc3200-launchxl-evaluation-board">CC3200-LAUNCHXL Evaluation Board</a></li>
-        <li>
-          <a href="#functional-blocks-master" id="toc-functional-blocks-master">Functional Blocks: Master</a>
-          <ul>
-            <li><a href="#aws-iot-core" id="toc-aws-iot-core">AWS IoT Core</a></li>
-            <li><a href="#oled-display" id="toc-oled-display">OLED Display</a></li>
-            <li><a href="#ir-receiver" id="toc-ir-receiver">IR Receiver</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#functional-blocks-slave" id="toc-functional-blocks-slave">Functional Blocks: Slave</a>
-          <ul>
-            <li><a href="#challenges" id="toc-challenges">Challenges</a></li>
-            <li><a href="#future-work" id="toc-future-work">Future Work</a></li>
-            <li><a href="#finalized-bom" id="toc-finalized-bom">Finalized BOM</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    <li><a href="#challenges" id="toc-challenges">Challenges</a></li>
+    <li><a href="#future-work" id="toc-future-work">Future Work</a></li>
+    <li><a href="#finalized-bom" id="toc-finalized-bom">Finalized BOM</a></li>
   </ul>
 </nav>
 
@@ -70,7 +50,7 @@
 
 <!-- ALL CONTENT THAT FOLLOWS WILL APPEAR IN AND AFTER THE TABLE OF CONTENTS -->
 
-<h1 id="market-survey">Market Survey</h1>
+<h1 id="similiar-products">Similar Products</h1>
 <p>There are two types of similar products on the market. The first one is products from AeroGarden. Their products allow users to grow plants in nutrient solutions in a limited amount of usually 5 to 10. Compared with this product, our product provides an automated system for nutrient control that ensures the plant always has the correct amount of nutrients needed to avoid excess or insufficient nutrients. The other product is an expensive commercial system for horticulture aiming for a large scale of growth. Compared with this one, our product has the advantage of being cheap and small-scale which is more suitable for individual hobbyists to explore hydroponics.</p>
 <div style="display:flex;flex-wrap:wrap;justify-content:space-evenly;">
   <div style='display: inline-block; vertical-align: top;'>
@@ -101,7 +81,7 @@
 
 <h1 id="design">Design</h1>
 <h2 id="system-architecture">System Architecture</h2>
-<div style="display:flex;flex-wrap:wrap;justify-content:space-evenly;">
+<div style="display:flex;flex-wrap;justify-content:space-evenly;">
   <div style="display:inline-block;vertical-align:top;flex:1 0 400px;">
     <p>As shown in the system flowchart, we use one of the CC3200 boards for the closed feedback loop for maintaining concentration in the environment. The board will read values with I2C protocol through an ADC which reads values from the thermistor and the TDS meter sensor. The board will also periodically read user-defined thresholds from the AWS cloud using RESTful APIs. When the sensory values read outside of the user-defined thresholds, the board will activate the motor control function to pump either water or nutrient solution to bring the concentration back within the thresholds. Meanwhile, another CC3200 board is frequently reading from the AWS cloud to present the current TDS reading and user-defined threshold to the user on an OLED through SPI protocols. To adjust the thresholds, the user can either do it remotely or locally by using a TV remote to type the number into the IR receiver. The adjustments will be updated to the AWS and if the user updates remotely, the local CC3200 board will update the values in the next synchronization.</p>
   </div>
@@ -114,7 +94,7 @@
 </div>
 
 <h2 id="functional-specification">Functional Specification</h2>
-<div style="display:flex;flex-wrap:wrap;justify-content:space-evenly;">
+<div style="display:flex;flex-wrap;justify-content:space-evenly;">
   <div style="display:inline-block;vertical-align:top;flex:1 0 300px;">
     <p>Our system works based on the following state diagram. The device will periodically monitor the temperature and the electrical conductivity (EC) of the solution and convert the values into a TDS value using a calibration curve. At the same time, the device will check for threshold inputs, both over the AWS shadow and via manual input on the IR receiver. It will compare the TDS with the lower and upper thresholds set by the user. If the value is within the thresholds, it will stay in the normal state, update the OLED, and wait for the next monitoring period. If the TDS value is too low or too high, the device will move into the corresponding state to add water or nutrient solution to the system to bring the values within range. This will be done in bursts as the device will move back to the normal state to wait for the system to re-equilibrate before repeating the process.</p>
   </div>
@@ -126,51 +106,11 @@
   </div>
 </div>
 
-<h1 id="implementation">Implementation</h1>
-<h2 id="cc3200-launchxl-evaluation-board">CC3200-LAUNCHXL Evaluation Board</h2>
-<div class="fig">
-  <img src="./media/Image_007.jpg" style="width:100%;height:auto;" />
-  <span class="caption">CC3200-LAUNCHXL Evaluation Board</span>
-</div>
-<p>Our implementation heavily utilizes the CC3200-LAUNCHXL boards. This board was selected due to its integrated Wi-Fi module which is essential for communication with the AWS IoT Core. The board contains an ARM Cortex-M4 core and supports multiple communication protocols, including UART, SPI, and I2C. The Wi-Fi module on the CC3200 is used to communicate with the AWS IoT Core and allows for remote monitoring and control of the hydroponic system. The microcontroller handles sensor data acquisition, motor control, and user interface operations.</p>
-<h2 id="functional-blocks-master">Functional Blocks: Master</h2>
-<h3 id="aws-iot-core">AWS IoT Core</h3>
-<div class="fig">
-  <img src="./media/Image_008.jpg" style="width:100%;height:auto;" />
-  <span class="caption">AWS IoT Core</span>
-</div>
-<p>The AWS IoT Core acts as a bridge between the hardware and the user interface. It stores the thresholds and sensor data and facilitates communication between the user's remote commands and the system. The CC3200-LAUNCHXL master board periodically publishes the sensor data to the AWS IoT Core and subscribes to the shadow document to update its internal threshold values. This ensures that any remote changes made by the user are reflected in the device’s operation.</p>
-<h3 id="oled-display">OLED Display</h3>
-<div class="fig">
-  <img src="./media/Image_009.jpg" style="width:100%;height:auto;" />
-  <span class="caption">OLED Display</span>
-</div>
-<p>The OLED display is used to present the current TDS reading and user-defined thresholds to the user. It is connected to the CC3200-LAUNCHXL board via SPI protocol. The display provides a clear and concise interface for the user to monitor the system's status and make necessary adjustments.</p>
-<h3 id="ir-receiver">IR Receiver</h3>
-<div class="fig">
-  <img src="./media/Image_010.jpg" style="width:100%;height:auto;" />
-  <span class="caption">IR Receiver</span>
-</div>
-<p>The IR receiver allows the user to interact with the system locally. By using a TV remote, the user can input new threshold values or command the system to perform certain actions. The IR receiver decodes the signals from the remote and sends the corresponding commands to the CC3200-LAUNCHXL board for processing.</p>
-<h2 id="functional-blocks-slave">Functional Blocks: Slave</h2>
-<h3 id="challenges">Challenges</h3>
-<p>During the implementation of our hydroponic system, we faced several challenges. One major challenge was ensuring accurate and reliable communication between the sensors, microcontroller, and AWS IoT Core. This required careful calibration and testing to ensure the system operated correctly under various conditions. Another challenge was optimizing the power consumption of the system to ensure it could operate efficiently over extended periods without frequent maintenance.</p>
-<h3 id="future-work">Future Work</h3>
-<p>For future work, we plan to further refine the system's user interface and add additional features such as automated pH control and integration with other smart home devices. We also aim to improve the system's scalability to support larger hydroponic setups and enhance the accuracy of sensor data through advanced calibration techniques.</p>
-<h3 id="finalized-bom">Finalized BOM</h3>
-<p>Below is the finalized bill of materials (BOM) for our hydroponic system:</p>
-<ul>
-  <li>CC3200-LAUNCHXL Evaluation Board</li>
-  <li>Thermistor</li>
-  <li>TDS Meter Sensor</li>
-  <li>OLED Display</li>
-  <li>IR Receiver</li>
-  <li>Water Pump</li>
-  <li>Nutrient Solution Pump</li>
-  <li>Power Supply</li>
-  <li>Miscellaneous Cables and Connectors</li>
-</ul>
-<p>The total cost for the BOM is approximately $150, making it an affordable solution for hobbyists and small-scale hydroponic growers.</p>
-</article>
-</body>
-</html>
+<h2 id="challenges">Challenges</h2>
+<p>[Content for Challenges]</p>
+
+<h2 id="future-work">Future Work</h2>
+<p>[Content for Future Work]</p>
+
+<h2 id="finalized-bom">Finalized BOM</h2>
+<p>[Content for Finalized BOM]</p>
