@@ -105,7 +105,22 @@
 </div>
 
 <h2 id="challenges">Challenges</h2>
-<p>[Content Needed]</p>
+<ol>
+  <li>
+    <h3>Menu Selection</h3>
+    <p>The biggest issue encountered in this section was an efficient way to display our selection screens without having to either redraw the screens with new cursor position or delete the previous drawn screen with only our current cursor position. This was implemented with the creation of a cursor state and change cursor function. The cursor state calls a function called blinkcursor that will use the current cursor location to access an array with the appropriate screen cursor location. The change cursor function takes the appropriate array for the current screen and increments or resets the current cursor location variable and then uses this update to update the cursor variables. So in general while there is no interrupt from the remote the screen will print and immediately move into the cursor state. In the cursor state it will blink the cursor at the current location. If there is an interrupt from the remote the input is evaluated and depending on the input from the remote it will either change screens or call the change cursor function to move the cursor up or down so when blinkcursor is called again the cursor is in the new location.</p>
+    <p>There is also an issue that occurred during the recording of our demonstration. The issue being the cursor moving in a cyclic pattern across the current menu selection screen whenever attempting to video the project.The first step in investigation to come to the conclusion it must come from the phone was clicking non-recognised inputs such as the number 8 on the IR remote. As expected this input had no effect on the selection screens. Following this, holding the phone next to the IR circuit and pressing the power button on the Iphone caused the cursor to consistently move down to the next position.  Upon further research the Iphone has a proximity sensor that is always active that is for features such as the raise-to-wake feature. This proximity sensor utilizes IR to measure proximity and it seems this interferes with the IR circuit as it is being interpreted as an input. There is currently no fix for the problem but the problem was deduced.</p>
+  </li>
+  <li>
+    <h3>Maze Movement</h3>
+    <p>Another Issue encountered during the development of the maze was crafting a collision system. The original collision system implemented, checked if the new location was at a banned location in the maze. A banned location is a location outside the range of the screen or where a maze wall exists. This allowed for the ball to phase through walls. The next implementation checked the 8 positions around the ball and determined banned positions then if the shifted position was one of these positions it would remain at the current location. This would still allow for the ball the phase through walls. The next attempt was to attempt to determine the respect of the ball with the walls around it and place x’s around every location outside the walls so the ball could not move to that position. Then we would update the position then clear all the added x’s. This implementation was never able to work as the x’s were unreliably placed. The final implementation checks every location of the ball that a pixel exists at and makes sure the location of every pixel did not contain an x which indicates a maze or was out of bounds. This was able to prevent the ball from passing through walls in most cases but in tight places or corners it may still occur.</p>
+  </li>
+  <li>
+    <h3>AWS Connection</h3>
+    <p>When attempting to utilize the given functions for connecting to the internet, errors would occur due to wrong pin connections. In our pin configuration Pin 2 was used for the data line in the I2C communication but in the given functions, pin 2 was used for an LED during the initialization process. This was fixed by locating the macros for the LEDs in “gpio_if.h” and changing the macro from pin 2 to pin 64. This change allowed for communication between AWS and the board.</p>
+  </li>
+</ol>
+
 
 <h2 id="future-work">Future Work</h2>
 <p>[Content Needed]</p>
