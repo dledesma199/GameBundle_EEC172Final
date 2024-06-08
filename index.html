@@ -105,7 +105,7 @@
 </div>
 
 <h2 id="challenges">Challenges</h2>
-<ol>
+<ul>
   <li>
     <h3>Menu Selection</h3>
     <p>The biggest issue encountered in this section was an efficient way to display our selection screens without having to either redraw the screens with new cursor position or delete the previous drawn screen with only our current cursor position. This was implemented with the creation of a cursor state and change cursor function. The cursor state calls a function called blinkcursor that will use the current cursor location to access an array with the appropriate screen cursor location. The change cursor function takes the appropriate array for the current screen and increments or resets the current cursor location variable and then uses this update to update the cursor variables. So in general while there is no interrupt from the remote the screen will print and immediately move into the cursor state. In the cursor state it will blink the cursor at the current location. If there is an interrupt from the remote the input is evaluated and depending on the input from the remote it will either change screens or call the change cursor function to move the cursor up or down so when blinkcursor is called again the cursor is in the new location.</p>
@@ -119,8 +119,7 @@
     <h3>AWS Connection</h3>
     <p>When attempting to utilize the given functions for connecting to the internet, errors would occur due to wrong pin connections. In our pin configuration Pin 2 was used for the data line in the I2C communication but in the given functions, pin 2 was used for an LED during the initialization process. This was fixed by locating the macros for the LEDs in “gpio_if.h” and changing the macro from pin 2 to pin 64. This change allowed for communication between AWS and the board.</p>
   </li>
-</ol>
-
+</ul>
 
 <h2 id="future-work">Future Work</h2>
 <p>[Content Needed]</p>
