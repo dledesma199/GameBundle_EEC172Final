@@ -22,6 +22,51 @@
     <h2>Description</h2>
     <p>The game bundle is a device that contains two pre-loaded games and a menu interface. The CC3200 is used as the general processor of this device to interpret the multiple forms of inputs from the user. AWS IoT was used to create a device shadow to store the high scores. The menu is interfaced using an IR remote to make decisions across the various menu screens. Pressing two is used to move the cursor up with five to move the cursor down. Pressing mute is the equivalent of an enter key and is used to make the decision once the cursor was properly navigated. The maze game if selected will give the open to choose an easy, medium, or hard maze. After the user has selected their difficulty the maze is loaded and the user can attempt to navigate the maze by tilting the board in the appropriate direction. The score is determined by subtracting the number of collisions from 800. If the user reaches the end zone they receive a win screen with their score. If this is a highscore then the shadow is updated with this score. The user loses if the amount of collisions surpasses 800 and is given a losing screen. The user is then navigated back to the menu screen. If navigating to the high score screen then the user will be shown the high score for each game. If navigating to the hangman game, the hangman game is loaded with the choice of 5 different words labeled as numbers for the user to guess in the game. The max word is 5 letters. The score is determined by counting the length of the word and assigning a max score for the longest word of 5 letters at 800 and 100 points less for each letter shorter than 5. If the stickman is drawn then the user loses with a score of 0 and is shown the lose screen. If the user wins they are shown the win screen with their score and if it is a highscore, the shadow is updated. </p>
     <p>Our source code can be found <a href="https://github.com/dledesma2000/EEC172_FinalProject.git">here</a>.</p>
+    <h2>Screenshots</h2>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-evenly;">
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/main_menu.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Main Menu</span>
+    </div>
+  </div>
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/maze_difficulty.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Maze Difficulty</span>
+    </div>
+  </div>
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/easyMaze.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Easy Maze</span>
+    </div>
+  </div>
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/mediumMaze.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Medium Maze</span>
+    </div>
+  </div>
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/hardMaze.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Hard Maze</span>
+    </div>
+  </div>
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/WinLoseScreen.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Win/Lose Screen</span>
+    </div>
+  </div>
+  <div style="flex:1 0 30%;margin:10px;">
+    <div class="fig">
+      <img src="./media/hangman.jpg" style="width:100%;height:auto;" />
+      <span class="caption">Hangman</span>
+    </div>
+  </div>
+</div>
     <h2>Video Demo</h2>
     <div style="text-align:center;margin:auto;max-width:560px">
       <div style="padding-bottom:56.25%;position:relative;height:0;">
