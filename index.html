@@ -121,11 +121,26 @@
   </li>
 </ul>
 
+
 <h2 id="future-work">Future Work</h2>
-<p>[Content Needed]</p>
+<ul>
+  <li>
+    <h3>Save State Implementation</h3>
+    <p>For further improvements to the device, a save state of the current state and relevant variables would be implemented. The relevant variables required would be to save the current x and y location of the ball, the current maze array, and the current score. AWS would be used to save the state of all these variables using http_post and passing in the variables into the JSON message. Then once saving is done the states then navigate back to the main menu. Then when choosing the maze game it will ask to load the save or play a new game. Loading the game will call http_get() to get the JSON message, This message will then be parsed to obtain the relevant variables and then passing these variables into the mazeGame function. The input that would be mapped to this would be the digit 3 on the remote to keep all the inputs in a similar location on the remote.</p>
+  </li>
+  <li>
+    <h3>Random Maze Generation</h3>
+    <p>Another improvement made could be from implementing random maze generation for random mazes. The first step would be to implement another cursor location on the maze difficulty selection screen for “Random.” The next step would be to generate an array with a random maze to be passed into the game function. This would be done using an algorithm to generate minimum spanning trees. Some popular algorithms are Kruskals, Prim’s, and Aldous-Broder. With further research to select the best algorithm this could be used to generate a random maze for the user to navigate.</p>
+  </li>
+  <li>
+    <h3>Random Word Selection in Hangman</h3>
+    <p>One final improvement (aside from finishing hangman), would come from the implementation of a random word selection for solo play in hangman. This would be done by adding another selection for hangman rather than directly loading the game when selected. If the random word selection was made then an API would be used to query a database for a random word to be used in hangman. API ninja has a random word generator that can be interfaced with. This would most likely be used to generate a random word for the user.</p>
+  </li>
+</ul>
 
 <h2 id="finalized-bom">Finalized BOM</h2>
 <p>[Content Needed]</p>
 </article>
 </body>
+</html>
 </html>
