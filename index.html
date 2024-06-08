@@ -51,44 +51,18 @@
 <!-- ALL CONTENT THAT FOLLOWS WILL APPEAR IN AND AFTER THE TABLE OF CONTENTS -->
 
 <h1 id="similiar-products">Similar Products</h1>
-<p>There are two types of similar products on the market. The first one is products from AeroGarden. Their products allow users to grow plants in nutrient solutions in a limited amount of usually 5 to 10. Compared with this product, our product provides an automated system for nutrient control that ensures the plant always has the correct amount of nutrients needed to avoid excess or insufficient nutrients. The other product is an expensive commercial system for horticulture aiming for a large scale of growth. Compared with this one, our product has the advantage of being cheap and small-scale which is more suitable for individual hobbyists to explore hydroponics.</p>
-<div style="display:flex;flex-wrap:wrap;justify-content:space-evenly;">
-  <div style='display: inline-block; vertical-align: top;'>
-    <img src="./media/Image_003.jpg" style="width:auto;height:200px" />
-    <span class="caption">
-      <a href="https://aerogarden.com/gardens/harvest-family/Harvest-2.0.html">AeroGarden Harvest 2.0</a>
-      <ul style="text-align:left;">
-        <li>Inexpensive ($90)</li>
-        <li>Not Automated</li>
-        <li>Small Scale</li>
-        <li>No remote monitoring</li>
-      </ul>
-    </span>
-  </div>
-  <div style='display: inline-block; vertical-align: top;'>
-    <img src="./media/Image_004.jpg" style="width:auto;height:200px" />
-    <span class="caption">
-      <a href="https://www.hydroexperts.com.au/Autogrow-MultiGrow-Controller-All-In-One-Controller-8-Growing-Zones">Autogrow Multigrow</a>
-      <ul style="text-align:left;">
-        <li>Expensive ($4500)</li>
-        <li>Fully Automated</li>
-        <li>Huge Scale</li>
-        <li>Cloud monitoring</li>
-      </ul>
-    </span>
-  </div>
-</div>
+<p>[Content Needed]</p>
 
 <h1 id="design">Design</h1>
 <h2 id="system-architecture">System Architecture</h2>
 <div style="display:flex;flex-wrap;justify-content:space-evenly;">
   <div style="display:inline-block;vertical-align:top;flex:1 0 400px;">
-    <p>As shown in the system flowchart, we use one of the CC3200 boards for the closed feedback loop for maintaining concentration in the environment. The board will read values with I2C protocol through an ADC which reads values from the thermistor and the TDS meter sensor. The board will also periodically read user-defined thresholds from the AWS cloud using RESTful APIs. When the sensory values read outside of the user-defined thresholds, the board will activate the motor control function to pump either water or nutrient solution to bring the concentration back within the thresholds. Meanwhile, another CC3200 board is frequently reading from the AWS cloud to present the current TDS reading and user-defined threshold to the user on an OLED through SPI protocols. To adjust the thresholds, the user can either do it remotely or locally by using a TV remote to type the number into the IR receiver. The adjustments will be updated to the AWS and if the user updates remotely, the local CC3200 board will update the values in the next synchronization.</p>
+    <p>[Content Needed]</p>
   </div>
   <div style="display:inline-block;vertical-align:top;flex:0 0 400px;">
     <div class="fig">
-      <img src="./media/Image_005.jpg" style="width:90%;height:auto;" />
-      <span class="caption">System Flowchart</span>
+      <img src="./media/hardware_diagram.jpg" style="width:90%;height:auto;" />
+      <span class="caption">Hardware Diagram</span>
     </div>
   </div>
 </div>
@@ -96,21 +70,21 @@
 <h2 id="functional-specification">Functional Specification</h2>
 <div style="display:flex;flex-wrap;justify-content:space-evenly;">
   <div style="display:inline-block;vertical-align:top;flex:1 0 300px;">
-    <p>Our system works based on the following state diagram. The device will periodically monitor the temperature and the electrical conductivity (EC) of the solution and convert the values into a TDS value using a calibration curve. At the same time, the device will check for threshold inputs, both over the AWS shadow and via manual input on the IR receiver. It will compare the TDS with the lower and upper thresholds set by the user. If the value is within the thresholds, it will stay in the normal state, update the OLED, and wait for the next monitoring period. If the TDS value is too low or too high, the device will move into the corresponding state to add water or nutrient solution to the system to bring the values within range. This will be done in bursts as the device will move back to the normal state to wait for the system to re-equilibrate before repeating the process.</p>
+    <p>[Content Needed]</p>
   </div>
   <div style="display:inline-block;vertical-align:top;flex:0 0 300px;">
     <div class="fig">
-      <img src="./media/Image_006.jpg" style="width:90%;height:auto;" />
+      <img src="./media/state_diagram.jpg" style="width:90%;height:auto;" />
       <span class="caption">State Diagram</span>
     </div>
   </div>
 </div>
 
 <h2 id="challenges">Challenges</h2>
-<p>[Content for Challenges]</p>
+<p>[Content Needed]</p>
 
 <h2 id="future-work">Future Work</h2>
-<p>[Content for Future Work]</p>
+<p>[Content Needed]</p>
 
 <h2 id="finalized-bom">Finalized BOM</h2>
-<p>[Content for Finalized BOM]</p>
+<p>[Content Needed]</p>
