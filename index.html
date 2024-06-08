@@ -125,29 +125,40 @@
 <h1 id="design">Design</h1>
 
 <h2 id="system-architecture">System Architecture</h2>
-<div style="display:flex;justify-content:space-between;">
-  <div style="flex-basis:45%;">
-    <div class="fig" style="text-align:center;margin:auto;">
+<div style="display:flex;flex-wrap;justify-content:space-evenly;">
+  <div style="display:inline-block;vertical-align:top;flex:1 0 400px;">
+    <div class="fig">
       <img src="./media/hardware_diagram.jpg" style="width:100%;height:auto;" />
       <span class="caption">Hardware Diagram</span>
     </div>
-  </div>
-  <div style="flex-basis:45%;">
-    <div class="fig" style="text-align:center;margin:auto;">
+    <div class="fig">
       <img src="./media/GameSchematic.jpg" style="width:100%;height:auto;" />
       <span class="caption">Game Schematic</span>
     </div>
   </div>
+  <div style="display:inline-block;vertical-align:top;flex:0 0 400px;">
+    <p>The CC3200 serves as the main controller for the implementation of this code. There are two sensors involved in this implementation: the accelerometer and the IR circuit. The accelerometer is communicated with using the I2C protocol. The IR circuit communicates with the NEC protocol, and the OLED is communicated with using the SPI protocol. The accelerometer is used in the maze game. The output from the accelerometer is then fed into the CC3200 to determine the orientation of the board and the new location of the next pixel.</p>
+    
+    <p>The IR Circuit is the second sensor to detect input from the user’s IR remote. This circuit will receive the IR wave and cause an interrupt in the CC3200 to allow for the data stream to be captured by the CC3200. Depending on the state and the data stream, the CC3200 then decides the outcome of the current state or game. The CC3200 then uses the information of the current state and the input from the IR or the accelerometer to then update the OLED with the current state information. AWS is used upon initialization to get the high scores and is also called whenever there is a new high score or the high score screen is selected.</p>
+  </div>
 </div>
 
+
 <h2 id="functional-specification">Functional Specification</h2>
-<div class="fig" style="text-align:center;margin:auto;max-width:560px">
-  <img src="./media/state_diagram.jpg" style="width:100%;height:auto;" />
-  <span class="caption">State Diagram</span>
+<div style="display:flex;flex-wrap;justify-content:space-evenly;">
+  <div style="display:inline-block;vertical-align:top;flex:1 0 400px;">
+    <div class="fig">
+      <img src="./media/state_diagram.jpg" style="width:100%;height:auto;" />
+      <span class="caption">State Diagram</span>
+    </div>
+    <p>The device has the states main_menu, maze_difficulty_screen, highscore_state, maze_state, hangman_screen, hangman_state, win_lose_screen, and cursor_state. Upon loading the game, the main_menu state is the beginning state. In this state, the menu screen is printed and the cursor variables are initialized. Then the state switches to the cursor state. This state will update the cursor location and switch the states depending on the input from the IR remote. If the maze selection is made on the first menu screen, then the state switches to maze_difficulty_screen. This state will display the selection screen and update the cursor variables, then switch to the cursor state. This state will update the cursor location and switch the states depending on the input from the IR remote.</p>
+
+    <p>From this state, once the difficulty is selected, the state switches to maze_state. In this state, depending on the difficulty selected, the appropriate maze is created and loaded into the maze game. The device will stay in this state until the user has navigated to the end location of the map or has pressed 1 on the IR remote. Reaching the end point will load the winning screen. Pressing 1 will quit the game in a loss and load the losing screen. Both of these screens are in the win_lose_state and once they are printed, then the device enters the cursor state and waits for the user's input. Once the user presses mute, the screen is exited and the main screen is loaded again, beginning the process.</p>
+
+    <p>If from the main menu screen the high score screen is selected, then the state will switch to highscore_state and use AWS to grab the high score and display it along with the headers. After this is displayed, it then enters the cursor state and waits for the user's input. Once the user clicks mute, then the state switches to the main menu state and begins again. If the user navigates to hangman in the main menu screen, then from cursor state the state will switch to hangman_screen and draw the hangman screen on the OLED. Then the state switches to hangman_state and the game begins. The user exits by either winning or losing the game or pressing 1 on the remote and losing. This will cause the state to switch to win_lose_screen and display the appropriate screen based on whether the user won or lost. Then the user must press mute to exit the win lose state and go back to the main menu where selections can be made again.</p>
+  </div>
 </div>
-<div style="display:inline-block;vertical-align:top;">
-  <p>[Content Needed]</p>
-</div>
+
 
 <h2 id="challenges">Challenges</h2>
 
