@@ -200,8 +200,8 @@
 <h1 id="design">Design</h1>
 
 <h2 id="system-architecture">System Architecture</h2>
-<div style="display:flex;flex-wrap;justify-content:space-evenly;">
-  <div style="display:inline-block;vertical-align:top;flex:1 0 400px;">
+<div style="display:flex;flex-wrap;justify-content:center;">
+  <div style="flex:1 0 400px;max-width:400px;">
     <div class="fig">
       <img src="./media/hardware_diagram.jpg" style="width:100%;height:auto;" />
       <span class="caption">Hardware Diagram</span>
@@ -211,12 +211,13 @@
       <span class="caption">Game Schematic</span>
     </div>
   </div>
-  <div style="display:inline-block;vertical-align:top;flex:0 0 400px;">
-    <p>The CC3200 serves as the main controller for the implementation of this code. There are two sensors involved in this implementation: the accelerometer and the IR circuit. The accelerometer is communicated with using the I2C protocol. The IR circuit communicates with the NEC protocol, and the OLED is communicated with using the SPI protocol. The accelerometer is used in the maze game. The output from the accelerometer is then fed into the CC3200 to determine the orientation of the board and the new location of the next pixel.</p>
-    
-    <p>The IR Circuit is the second sensor to detect input from the user’s IR remote. This circuit will receive the IR wave and cause an interrupt in the CC3200 to allow for the data stream to be captured by the CC3200. Depending on the state and the data stream, the CC3200 then decides the outcome of the current state or game. The CC3200 then uses the information of the current state and the input from the IR or the accelerometer to then update the OLED with the current state information. AWS is used upon initialization to get the high scores and is also called whenever there is a new high score or the high score screen is selected.</p>
-  </div>
 </div>
+<div style="max-width:800px;margin:auto;">
+  <p>The CC3200 serves as the main controller for the implementation of this code. There are two sensors involved in this implementation: the accelerometer and the IR circuit. The accelerometer is communicated with using the I2C protocol. The IR circuit communicates with the NEC protocol, and the OLED is communicated with using the SPI protocol. The accelerometer is used in the maze game. The output from the accelerometer is then fed into the CC3200 to determine the orientation of the board and the new location of the next pixel.</p>
+
+  <p>The IR Circuit is the second sensor to detect input from the user’s IR remote. This circuit will receive the IR wave and cause an interrupt in the CC3200 to allow for the data stream to be captured by the CC3200. Depending on the state and the data stream, the CC3200 then decides the outcome of the current state or game. The CC3200 then uses the information of the current state and the input from the IR or the accelerometer to then update the OLED with the current state information. AWS is used upon initialization to get the high scores and is also called whenever there is a new high score or the high score screen is selected.</p>
+</div>
+
 
 
 <h2 id="functional-specification">Functional Specification</h2>
