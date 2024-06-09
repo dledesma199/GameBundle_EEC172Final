@@ -37,8 +37,6 @@ Our source code can be found [here](https://github.com/dledesma2000/GameBundle_E
 
 [![Alt text](https://img.youtube.com/vi/_6uB2nkWJQg/0.jpg)](https://www.youtube.com/watch?v=_6uB2nkWJQg)
 
-
-<nav id="TOC" role="doc-toc">
   ## Table of Contents
   - [Similar Products](#similar-products)
   - [Design](#design)
@@ -53,7 +51,6 @@ Our source code can be found [here](https://github.com/dledesma2000/GameBundle_E
   - [Challenges](#challenges)
   - [Future Work](#future-work)
   - [Finalized BOM](#finalized-bom)
-</nav>
 
 ## Similar Products
 
