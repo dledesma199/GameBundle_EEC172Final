@@ -244,7 +244,7 @@
   </div>
 </div>
 
-<h2 id ="implementation">IMPLEMENTATION</h2>
+<h2 id ="implementation">Implementation</h2>
 
 <h3 id="ir-interrupt-handling">IR Interrupt Handling</h3>
 <p>This function was initialized to be triggered on falling edges and was tied to pin 50. This function uses NEC protocol to decipher the IR wave. This uses the systick module to determine the wavelength of each pulse. The checks are if the wavelength is 13.5ms which indicates the beginning of the data stream. This sets our data stream to 0 and our bit counter to 0. Then it checks if the wavelength is less than 1.2ms to indicate a 0 being transmitted or if it is larger than 1.2ms and less than 2.7ms then a 1 was transmitted. Both of these checks increment the bit counter variable. This continues until the bit counter is 32 which sets the checkFlag to 1 indicating that this data stream is completed and ready to be checked.</p>
