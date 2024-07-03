@@ -10,6 +10,9 @@ The game bundle is a device that contains two pre-loaded games and a menu interf
 
 Our source code can be found [here](https://github.com/dledesma2000/GameBundle_EEC172Final.git).
 
+Base Menu interfaces and the maze game implemented by Daniel Ledesma
+
+Hangman implemented by Eitan Sahnovich
 ## Game Screens
 
 ![Main Menu](./media/main_menu.jpg)
